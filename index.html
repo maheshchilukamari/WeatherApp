@@ -42,13 +42,13 @@
       req.onload = function () {
         if (req.status >= 200 && req.status < 400) {
           var data = JSON.parse(req.responseText);
-        //  if(cityName == 'Hyderabad'){
-        //        document.getElementById('test').src = 'images/hyd.jpg';
-         // } else if(cityName == 'Mumbai'){
-          //      document.getElementById('test').src = 'images/mum.jpg';
-          //} else if(cityName == 'Delhi'){
-           //     document.getElementById('test').src = 'images/del.jpg';
-        //  } 
+          if(cityName == 'Hyderabad'){
+                document.getElementById('test').src = 'images/hyd.jpg';
+          } else if(cityName == 'Mumbai'){
+                document.getElementById('test').src = 'images/mum.jpg';
+          } else if(cityName == 'Delhi'){
+                document.getElementById('test').src = 'images/del.jpg';
+          } 
           document.getElementById("city").textContent = data.name;
           document.getElementById("temp").textContent = data.main.temp;
           document.getElementById("weather").textContent = data.weather[0].main;
