@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <title>AJAX</title>
+    <script>
+
+        
+
+        window.onload = function() {
+           fetch();
+        };
+      // create a request
+
+      // response
+
+      // parse the response
+
+      // manage error
+
+      // send the request
+      function fetch() {
+        var cityName;
+            document.getElementById("city1").onchange = function() {
+                cityName = document.getElementById("city1").value;
+            
+
+      var req = new XMLHttpRequest();
+      req.open(
+        "GET",
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=93f26e3c57081a6210de53b8dcfdfea4`,
+        true
+      );
+      req.onload = function () {
+        if (req.status >= 200 && req.status < 400) {
+          var data = JSON.parse(req.responseText);
+          if(cityName == 'Hyderabad'){
+                document.getElementById('test').src = 'images/hyd.jpg';
+          } else if(cityName == 'Mumbai'){
+                document.getElementById('test').src = 'images/mum.jpg';
+          } else if(cityName == 'Delhi'){
+                document.getElementById('test').src = 'images/del.jpg';
+          } else if(cityName == 'Karimnagar'){
+                document.getElementById('test').src = 'images/knr.jpg';
+          }
+          document.getElementById("city").textContent = data.name;
+          document.getElementById("temp").textContent = data.main.temp;
+          document.getElementById("weather").textContent = data.weather[0].main;
+          document.getElementById("wind_deg").textContent = data.wind.deg;
+          document.getElementById("wind_speed").textContent = data.wind.speed;
+        } else {
+          //document.getElementById('test').src = ' ';
+          document.getElementById("city").textContent = " ";
+          document.getElementById("temp").textContent = " ";
+          document.getElementById("weather").textContent = " ";
+          document.getElementById("wind_deg").textContent = " ";
+          document.getElementById("wind_speed").textContent = " ";
+          console.log(req.status);
+        }
+      };
+
+      req.onerror = function () {
+        console.log("Couldn't connect");
+      };
+
+      req.send();
+    };
+    }
+    </script>
+  </head>
+  <body >
+    <div class="container">
+      <div style="background-color: aquamarine;  margin: 10px;">
+        <h1
+          id="city"
+          style="text-align: center;"
+        ></h1>
+      </div>
+      <div class="row">
+          <div class="col-md-4" style="margin: 10px;">
+            <img src=" " id="test">
+    </div>
+    <div class="col-md-4" style="margin: 10px;">
+        <label for="city">SELECT CITY</label>
+        <select id="city1">
+                <option value=" ">--SELECT--</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Karimnagar">Karimnagar</option>
+        </select>
+</div>
+</div>  
+<div class="row">
+    <div class="col-md-2" style="margin: 10px;">
+            <label for="temp" style="color: blue;">TEMPARATURE</label>
+        </div>
+        <div class="col-md-1" style="margin: 10px;">
+          <p id="temp"></p>
+        </div>
+        </div>
+          <div class="row">
+              <div class="col-md-2" style="margin: 10px;">
+          <label for="weather" style="color: blue;">WEATHER</label>
+        </div>
+        <div class="col-md-1" style="margin: 10px;">
+          <p id="weather"></p>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" style="margin: 10px;">
+          <label for="wind_deg" style="color: blue;">WIND DEGREE</label>
+        </div>
+        <div class="col-md-2" style="margin: 10px;">
+          <p id="wind_deg"></p>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2" style="margin: 10px;">
+          <label for="wind_speed" style="color: blue;">WIND SPEED</label>
+        </div>
+        <div class="col-md-2" style="margin: 10px;">
+          <p id="wind_speed"></p>
+        </div>
+        </div>  
+  </body>
+</html>
